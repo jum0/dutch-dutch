@@ -19,10 +19,23 @@ const GlobalStyle = () => (
         min-height: 100%;
         height: 100%;
         font-family: Helvetica, Arial, sans-serif;
+        background-color: #efefef;
       }
 
       li {
         list-style: none;
+      }
+
+      // input 숫자 화살표 삭제
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      /* Firefox */
+      input[type='number'] {
+        -moz-appearance: textfield;
       }
     `}
   />
