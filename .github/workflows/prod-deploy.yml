@@ -1,0 +1,25 @@
+name: prod-deploy
+
+on:
+  push: # 적용될 액션
+    branches: main # 적용될 브랜치
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 인스턴스 OS
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # 워크플로에서 액세스할 수 있도록 에서 저장소를 체크아웃
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: S3 Deploy
+        run: aws s3 sync ./build s3://dutch-dutch-prod-deploy/ # s3 이름 dutch-dutch-prod-deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
