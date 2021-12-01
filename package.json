@@ -1,6 +1,6 @@
 {
   "name": "dutch-dutch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "dutch-dutch is dutch treat calculator application!",
   "main": "src/index.tsx",
   "repository": "https://github.com/jum0/dutch-dutch.git",

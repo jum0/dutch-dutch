@@ -6,6 +6,7 @@ import InputContainer from '../components/InputContainer';
 import Button from '../components/Button';
 import { getResult } from '../service';
 import Result from '../components/Result';
+import { ALERT_MESSAGE } from '../constants/message';
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +43,19 @@ const Home = () => {
 
   const calculate = () => {
     if (inputLists.length < 2) {
-      alert('2명 이상을 입력해 주세요.');
+      alert(ALERT_MESSAGE.NEED_MIN_NUMBER_OF_INPUT_LIST);
+
+      return;
+    }
+
+    if (inputLists.some((inputList) => inputList.name === '')) {
+      alert(ALERT_MESSAGE.NEED_NAME);
+
+      return;
+    }
+
+    if (inputLists.every((inputList) => inputList.cost === 0)) {
+      alert(ALERT_MESSAGE.NEED_COST);
 
       return;
     }
