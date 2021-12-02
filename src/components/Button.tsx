@@ -1,37 +1,55 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
+import { PALETTE, THEME_COLOR } from '../constants';
 
 interface ButtonProps {
   children: ReactNode;
+  buttonType: keyof typeof buttonStyle;
   styles?: React.CSSProperties;
   onClick?: () => void;
 }
 
-const Container = styled.button`
+type StyledProps = Omit<ButtonProps, 'children' | 'onClick'>;
+
+const buttonStyle = {
+  FILLED: css`
+    color: ${PALETTE.WHITE};
+    background-color: ${THEME_COLOR.PRIMARY};
+
+    &:hover {
+      background-color: ${PALETTE.GREEN900};
+    }
+  `,
+  BORDERED: css`
+    color: ${THEME_COLOR.PRIMARY};
+    background-color: transparent;
+    border: 0.1rem solid ${THEME_COLOR.PRIMARY};
+
+    &:hover {
+      color: ${PALETTE.WHITE};
+      background-color: ${PALETTE.GREEN500};
+      border: 0.1rem solid ${PALETTE.GREEN500};
+    }
+  `,
+};
+
+const Container = styled.button<StyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 2rem;
-  background-color: #efefef;
-  border: none;
-  border-radius: 0.5rem;
-  color: #444;
-  font-weight: 600;
-  text-align: center;
+  border-radius: 0.7rem;
+  font-weight: 500;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7), -6px -6px 10px rgba(255, 255, 255, 0.5),
-    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
 
-  &:hover {
-    box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), -2px -2px 4px rgba(255, 255, 255, 0.4),
-      2px 2px 2px rgba(255, 255, 255, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  ${({ buttonType }) => buttonStyle[buttonType]}
 `;
 
-const Button = ({ children, styles, onClick }: ButtonProps) => (
-  <Container style={styles} onClick={onClick}>
+const Button = ({ children, buttonType, styles, onClick }: ButtonProps) => (
+  <Container buttonType={buttonType} style={styles} onClick={onClick}>
     {children}
   </Container>
 );

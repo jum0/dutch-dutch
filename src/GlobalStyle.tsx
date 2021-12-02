@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
+import { THEME_COLOR } from './constants';
 
 const GlobalStyle = () => (
   <Global
@@ -19,7 +20,7 @@ const GlobalStyle = () => (
         min-height: 100%;
         height: 100%;
         font-family: Helvetica, Arial, sans-serif;
-        background-color: #efefef;
+        background-color: ${THEME_COLOR.BACKGROUND};
       }
 
       li {

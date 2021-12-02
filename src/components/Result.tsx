@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { PALETTE } from '../constants';
 
 interface ResultProps {
   sender?: string;
@@ -7,13 +8,14 @@ interface ResultProps {
 }
 
 const Container = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.5rem;
-  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7), -6px -6px 10px rgba(255, 255, 255, 0.5),
-    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  border-radius: 0.7rem;
+  color: ${PALETTE.GREEN900};
+  background-color: transparent;
+  border: 0.1rem solid ${PALETTE.GREEN900};
   padding: 1rem;
   margin: 0.3rem 0;
   gap: 1rem;
@@ -33,7 +35,7 @@ const Receiver = styled.div``;
 const Cost = styled.div``;
 
 const Postposition = styled.div`
-  color: grey;
+  color: ${PALETTE.GREEN500};
 `;
 
 const Result = ({ sender, receiver, cost }: ResultProps) => (

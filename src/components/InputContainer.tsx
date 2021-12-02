@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { SetStateAction } from 'react';
+import { THEME_COLOR } from '../constants';
 import { InputList } from '../types/inputList';
 import Button from './Button';
 
@@ -23,15 +24,10 @@ const LineContainer = styled.div`
   gap: 1rem;
 `;
 
-const AddButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const Input = styled.input`
   width: 6rem;
   height: 2rem;
-  border: 0.0625rem solid black;
+  border: 0.1rem solid ${THEME_COLOR.PRIMARY};
   border-radius: 0.25rem;
   background-color: transparent;
   text-align: center;
@@ -60,10 +56,6 @@ const InputContainer = ({ inputLists, setInputList }: InputContainerProps) => {
     setInputList(list);
   };
 
-  const handleAddClick = () => {
-    setInputList([...inputLists, { name: '', cost: 0 }]);
-  };
-
   const handleRemoveClick = (index: number) => {
     const list = [...inputLists];
 
@@ -88,18 +80,17 @@ const InputContainer = ({ inputLists, setInputList }: InputContainerProps) => {
           />
           <>
             {inputLists.length !== 1 && (
-              <Button styles={{ width: '4rem' }} onClick={() => handleRemoveClick(index)}>
+              <Button
+                buttonType="FILLED"
+                styles={{ width: '4rem' }}
+                onClick={() => handleRemoveClick(index)}
+              >
                 삭제
               </Button>
             )}
           </>
         </LineContainer>
       ))}
-      <AddButtonContainer>
-        <Button styles={{ maxWidth: '18rem' }} onClick={handleAddClick}>
-          추가
-        </Button>
-      </AddButtonContainer>
     </Container>
   );
 };

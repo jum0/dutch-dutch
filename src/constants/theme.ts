@@ -1,0 +1,8 @@
+import PALETTE from './palette';
+
+const THEME_COLOR = {
+  PRIMARY: PALETTE.GREEN700,
+  BACKGROUND: PALETTE.GREY100,
+};
+
+export { THEME_COLOR };

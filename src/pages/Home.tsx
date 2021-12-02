@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import Frame from '../components/Frame';
-import Title from '../components/Title';
-import InputContainer from '../components/InputContainer';
-import Button from '../components/Button';
 import { getResult } from '../service';
-import Result from '../components/Result';
-import { ALERT_MESSAGE } from '../constants/message';
+import { ALERT_MESSAGE } from '../constants';
+import { Button, Frame, InputContainer, Result, Logo } from '../components';
 
 const Container = styled.div`
   display: flex;
@@ -17,12 +13,19 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const ResetCalculationContainer = styled.div`
+const UpperContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0 2rem;
+`;
+
+const CalculationContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   margin-top: 3rem;
   gap: 1rem;
 `;
@@ -68,20 +71,28 @@ const Home = () => {
     setResult([{}]);
   };
 
+  const addPerson = () => {
+    setInputList([...inputLists, { name: '', cost: 0 }]);
+  };
+
   return (
     <Frame>
       <Container>
-        <Title title="더치더치" />
-        <InputContainer inputLists={inputLists} setInputList={setInputList} />
-
-        <ResetCalculationContainer>
-          <Button styles={{ width: '30%' }} onClick={reset}>
+        <Logo />
+        <UpperContainer>
+          <Button buttonType="BORDERED" styles={{ maxWidth: '4rem' }} onClick={reset}>
             초기화
           </Button>
-          <Button styles={{ width: '30%' }} onClick={calculate}>
-            계산하기
+          <Button buttonType="BORDERED" styles={{ maxWidth: '4rem' }} onClick={addPerson}>
+            추가
           </Button>
-        </ResetCalculationContainer>
+        </UpperContainer>
+        <InputContainer inputLists={inputLists} setInputList={setInputList} />
+        <CalculationContainer>
+          <Button buttonType="FILLED" onClick={calculate}>
+            계산
+          </Button>
+        </CalculationContainer>
 
         <ResultContainer>
           {!!Object.keys(result[0]).length &&
