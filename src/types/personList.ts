@@ -1,4 +1,4 @@
-export interface InputList {
+export interface PersonList {
   name: string;
   cost: number;
 }

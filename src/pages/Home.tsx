@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import { getResult } from '../service';
 import { ALERT_MESSAGE } from '../constants';
-import { Button, Frame, InputContainer, Result, Logo } from '../components';
+import { Button, Frame, PersonInfo, Result, Logo } from '../components';
 
 const Container = styled.div`
   display: flex;
@@ -39,40 +39,53 @@ const ResultContainer = styled.div`
 `;
 
 const Home = () => {
-  const [inputLists, setInputList] = useState([{ name: '', cost: 0 }]);
+  const [personList, setPersonList] = useState([{ name: '', cost: 0 }]);
   const [result, setResult] = useState<{ sender?: string; receiver?: string; cost?: number }[]>([
     {},
   ]);
 
   const calculate = () => {
-    if (inputLists.length < 2) {
-      alert(ALERT_MESSAGE.NEED_MIN_NUMBER_OF_INPUT_LIST);
+    // TODO: 로직 분리
+    if (personList.length < 2) {
+      alert(ALERT_MESSAGE.NEED_MIN_PEOPLE);
 
       return;
     }
 
-    if (inputLists.some((inputList) => inputList.name === '')) {
+    if (personList.some((person) => person.name === '')) {
       alert(ALERT_MESSAGE.NEED_NAME);
 
       return;
     }
 
-    if (inputLists.every((inputList) => inputList.cost === 0)) {
+    if (personList.some((person) => isNaN(person.cost))) {
       alert(ALERT_MESSAGE.NEED_COST);
 
       return;
     }
 
-    setResult(getResult(inputLists));
+    if (personList.every((person) => person.cost === 0)) {
+      alert(ALERT_MESSAGE.NEED_COST_NOT_ZERO);
+
+      return;
+    }
+
+    if (new Set(personList.map((person) => person.cost)).size === 1) {
+      alert(ALERT_MESSAGE.NEED_DIFFERENT_COST);
+
+      return;
+    }
+
+    setResult(getResult(personList));
   };
 
   const reset = () => {
-    setInputList([{ name: '', cost: 0 }]);
+    setPersonList([{ name: '', cost: 0 }]);
     setResult([{}]);
   };
 
   const addPerson = () => {
-    setInputList([...inputLists, { name: '', cost: 0 }]);
+    setPersonList([...personList, { name: '', cost: 0 }]);
   };
 
   return (
@@ -87,7 +100,7 @@ const Home = () => {
             추가
           </Button>
         </UpperContainer>
-        <InputContainer inputLists={inputLists} setInputList={setInputList} />
+        <PersonInfo personList={personList} setPersonList={setPersonList} />
         <CalculationContainer>
           <Button buttonType="FILLED" onClick={calculate}>
             계산

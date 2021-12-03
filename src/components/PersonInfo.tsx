@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { SetStateAction } from 'react';
 import { THEME_COLOR } from '../constants';
-import { InputList } from '../types/inputList';
+import { PersonList } from '../types/personList';
 import Button from './Button';
 
-interface InputContainerProps {
-  inputLists: InputList[];
-  setInputList: React.Dispatch<SetStateAction<InputList[]>>;
+interface PersonInfoProps {
+  personList: PersonList[];
+  setPersonList: React.Dispatch<SetStateAction<PersonList[]>>;
 }
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Container = styled.div`
   gap: 2rem;
 `;
 
-const LineContainer = styled.div`
+const PersonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -33,16 +33,16 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const InputContainer = ({ inputLists, setInputList }: InputContainerProps) => {
+const PersonInfo = ({ personList, setPersonList }: PersonInfoProps) => {
   const handleNameInputChange = (
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
     const { value } = target;
-    const list = [...inputLists];
+    const list = [...personList];
 
     list[index].name = value;
-    setInputList(list);
+    setPersonList(list);
   };
 
   const handleCostInputChange = (
@@ -50,36 +50,36 @@ const InputContainer = ({ inputLists, setInputList }: InputContainerProps) => {
     index: number,
   ) => {
     const { valueAsNumber } = target;
-    const list = [...inputLists];
+    const list = [...personList];
 
     list[index].cost = valueAsNumber;
-    setInputList(list);
+    setPersonList(list);
   };
 
   const handleRemoveClick = (index: number) => {
-    const list = [...inputLists];
+    const list = [...personList];
 
     list.splice(index, 1);
-    setInputList(list);
+    setPersonList(list);
   };
 
   return (
     <Container>
-      {inputLists.map((inputList, index) => (
-        <LineContainer key={index}>
+      {personList.map((person, index) => (
+        <PersonContainer key={index}>
           <Input
             placeholder="이름"
-            value={inputList.name}
+            value={person.name}
             onChange={(event) => handleNameInputChange(event, index)}
           />
           <Input
             type="number"
             placeholder="금액"
-            value={inputList.cost}
+            value={person.cost}
             onChange={(event) => handleCostInputChange(event, index)}
           />
           <>
-            {inputLists.length !== 1 && (
+            {personList.length !== 1 && (
               <Button
                 buttonType="FILLED"
                 styles={{ width: '4rem' }}
@@ -89,10 +89,10 @@ const InputContainer = ({ inputLists, setInputList }: InputContainerProps) => {
               </Button>
             )}
           </>
-        </LineContainer>
+        </PersonContainer>
       ))}
     </Container>
   );
 };
 
-export default InputContainer;
+export default PersonInfo;
