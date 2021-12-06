@@ -52,7 +52,7 @@ const Home = () => {
       return;
     }
 
-    if (personList.some((person) => person.name === '')) {
+    if (personList.some((person) => person.name === '' || person.name.match(/\s/g))) {
       alert(ALERT_MESSAGE.NEED_NAME);
 
       return;

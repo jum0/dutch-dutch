@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { SetStateAction } from 'react';
-import { THEME_COLOR } from '../constants';
+import { RULE, THEME_COLOR } from '../constants';
 import { PersonList } from '../types/personList';
 import Button from './Button';
 
@@ -70,6 +70,7 @@ const PersonInfo = ({ personList, setPersonList }: PersonInfoProps) => {
           <Input
             placeholder="이름"
             value={person.name}
+            maxLength={RULE.MAX_NAME_LENGTH}
             onChange={(event) => handleNameInputChange(event, index)}
           />
           <Input
