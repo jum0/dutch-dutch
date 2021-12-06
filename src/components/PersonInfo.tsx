@@ -38,10 +38,9 @@ const PersonInfo = ({ personList, setPersonList }: PersonInfoProps) => {
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const { value } = target;
     const list = [...personList];
 
-    list[index].name = value;
+    list[index].name = target.value;
     setPersonList(list);
   };
 
@@ -49,11 +48,16 @@ const PersonInfo = ({ personList, setPersonList }: PersonInfoProps) => {
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const { valueAsNumber } = target;
     const list = [...personList];
 
-    list[index].cost = valueAsNumber;
+    list[index].cost = target.valueAsNumber;
     setPersonList(list);
+  };
+
+  const handleCostInputFocus = ({ target }: React.FocusEvent<HTMLInputElement>) => {
+    if (target.value.match(/^0/g)) {
+      target.value = '';
+    }
   };
 
   const handleRemoveClick = (index: number) => {
@@ -77,6 +81,7 @@ const PersonInfo = ({ personList, setPersonList }: PersonInfoProps) => {
             type="number"
             placeholder="금액"
             value={person.cost}
+            onFocus={(event) => handleCostInputFocus(event)}
             onChange={(event) => handleCostInputChange(event, index)}
           />
           <>

@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { PALETTE } from '../constants';
 
 interface ResultProps {
-  sender?: string;
-  receiver?: string;
-  cost?: number;
+  sender: string;
+  receiver: string;
+  cost: number;
 }
 
 const Container = styled.div`
@@ -48,7 +48,7 @@ const Result = ({ sender, receiver, cost }: ResultProps) => (
       <Receiver>{receiver}</Receiver>
       <Postposition>에게</Postposition>
     </NameContainer>
-    <Cost>{cost}</Cost>
+    <Cost>{cost.toLocaleString()}</Cost>
   </Container>
 );
 

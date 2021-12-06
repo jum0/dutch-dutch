@@ -40,8 +40,8 @@ const ResultContainer = styled.div`
 
 const Home = () => {
   const [personList, setPersonList] = useState([{ name: '', cost: 0 }]);
-  const [result, setResult] = useState<{ sender?: string; receiver?: string; cost?: number }[]>([
-    {},
+  const [result, setResult] = useState<{ sender: string; receiver: string; cost: number }[]>([
+    { sender: '', receiver: '', cost: 0 },
   ]);
 
   const calculate = () => {
@@ -64,6 +64,12 @@ const Home = () => {
       return;
     }
 
+    if (personList.some((person) => person.cost < 0)) {
+      alert(ALERT_MESSAGE.NEED_COST_NOT_NEGATIVE_NUMBER);
+
+      return;
+    }
+
     if (personList.every((person) => person.cost === 0)) {
       alert(ALERT_MESSAGE.NEED_COST_NOT_ZERO);
 
@@ -81,7 +87,7 @@ const Home = () => {
 
   const reset = () => {
     setPersonList([{ name: '', cost: 0 }]);
-    setResult([{}]);
+    setResult([{ sender: '', receiver: '', cost: 0 }]);
   };
 
   const addPerson = () => {
@@ -108,7 +114,7 @@ const Home = () => {
         </CalculationContainer>
 
         <ResultContainer>
-          {!!Object.keys(result[0]).length &&
+          {!Object.values(result[0]).every((v) => !!v === false) &&
             result.map(({ sender, receiver, cost }, index) => (
               <li key={index}>
                 <Result sender={sender} receiver={receiver} cost={cost} />
