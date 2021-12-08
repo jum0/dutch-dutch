@@ -27,6 +27,10 @@ const GlobalStyle = () => (
         list-style: none;
       }
 
+      input {
+        font-weight: 300;
+      }
+
       // input 숫자 화살표 삭제
       /* Chrome, Safari, Edge, Opera */
       input::-webkit-outer-spin-button,

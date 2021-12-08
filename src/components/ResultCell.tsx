@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { PALETTE } from '../constants';
 
-interface ResultProps {
+interface ResultCellProps {
   sender: string;
   receiver: string;
   cost: number;
@@ -16,40 +16,34 @@ const Container = styled.div`
   color: ${PALETTE.GREEN900};
   background-color: transparent;
   border: 0.1rem solid ${PALETTE.GREEN900};
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 0.3rem 0;
   gap: 1rem;
 `;
 
-const NameContainer = styled.div`
+const Name = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.2rem;
 `;
 
-const Sender = styled.div``;
-
-const Receiver = styled.div``;
-
-const Cost = styled.div``;
-
 const Postposition = styled.div`
   color: ${PALETTE.GREEN500};
 `;
 
-const Result = ({ sender, receiver, cost }: ResultProps) => (
+const ResultCell = ({ sender, receiver, cost }: ResultCellProps) => (
   <Container>
-    <NameContainer>
-      <Sender>{sender}</Sender>
+    <Name>
+      <div>{sender}</div>
       <Postposition>(이)가</Postposition>
-    </NameContainer>
-    <NameContainer>
-      <Receiver>{receiver}</Receiver>
+    </Name>
+    <Name>
+      <div>{receiver}</div>
       <Postposition>에게</Postposition>
-    </NameContainer>
-    <Cost>{cost.toLocaleString()}</Cost>
+    </Name>
+    <div>{cost.toLocaleString()}</div>
   </Container>
 );
 
-export default Result;
+export default ResultCell;

@@ -9,7 +9,7 @@ const Container = styled.div<{ width: string }>`
   width: ${({ width }) => width};
 `;
 
-const Logo = ({ width = '8rem' }: LogoProps) => (
+const Logo = ({ width = '5.5rem' }: LogoProps) => (
   <Container width={width}>
     <img src={logoImg} alt="로고 이미지" width="100%" />
   </Container>
