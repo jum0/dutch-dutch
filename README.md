@@ -1,4 +1,4 @@
-<img width="100%" alt="더치더치 프로젝트 설명 이미지" src="https://user-images.githubusercontent.com/40762111/144459465-0aac4280-855d-48f1-87e0-c1d868669542.png">
+<img width="100%" alt="더치더치 프로젝트 설명 이미지" src="https://user-images.githubusercontent.com/40762111/145273738-1d6d43c3-e678-4f77-903a-61d0331ff000.png">
 
 # 프로젝트 소개
 
