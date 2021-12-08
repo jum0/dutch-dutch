@@ -5,7 +5,7 @@ import { PALETTE, THEME_COLOR } from '../constants';
 
 interface ButtonProps {
   children: ReactNode;
-  buttonType: keyof typeof buttonStyle;
+  buttonType?: keyof typeof buttonStyle;
   styles?: React.CSSProperties;
   onClick?: () => void;
 }
@@ -38,17 +38,18 @@ const Container = styled.button<StyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 20%;
+  min-width: 10rem;
   height: 2rem;
+  padding-top: 0.1rem;
   border-radius: 0.7rem;
-  font-weight: 500;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 
-  ${({ buttonType }) => buttonStyle[buttonType]}
+  ${({ buttonType }) => buttonType && buttonStyle[buttonType]}
 `;
 
-const Button = ({ children, buttonType, styles, onClick }: ButtonProps) => (
+const Button = ({ children, buttonType = 'FILLED', styles, onClick }: ButtonProps) => (
   <Container buttonType={buttonType} style={styles} onClick={onClick}>
     {children}
   </Container>
